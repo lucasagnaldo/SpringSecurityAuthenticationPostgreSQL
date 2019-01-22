@@ -19,6 +19,8 @@ Para executar a instalação, desenvolvimento e testes deverá ter instalado as 
 
 Antes de executar a aplicação deverá ser criadas as tabelas e inseridas informações de testes na base de dados.
 
+* Criação da tabela de usuários
+
 ```
 CREATE TABLE users(
    username varchar(20) NOT NULL,
@@ -26,7 +28,11 @@ CREATE TABLE users(
    enabled boolean NOT NULL DEFAULT FALSE,
    primary key(username)
 );
+```
 
+* Criação da tabela de permissão de usuários
+
+```
 create table user_roles (
   user_role_id SERIAL PRIMARY KEY,
   username varchar(20) NOT NULL,
@@ -34,7 +40,11 @@ create table user_roles (
   UNIQUE (username,role),
   FOREIGN KEY (username) REFERENCES users (username)
 );
+```
 
+* Inserção dos registros nas tabelas
+
+```
 INSERT INTO users(username,password,enabled) VALUES ('maria','maria', true);
 INSERT INTO users(username,password,enabled) VALUES ('joao','joao', true);
  
@@ -43,6 +53,11 @@ INSERT INTO user_roles (username, role) VALUES ('maria', 'ROLE_ADMIN');
 INSERT INTO user_roles (username, role) VALUES ('joao', 'ROLE_USER');
 ```
 
+* URL para autenticação
+
+```
+http://localhost:8080/login
+```
 
 ## Author
 
